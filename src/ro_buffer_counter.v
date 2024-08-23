@@ -25,9 +25,9 @@ module ro_buffer_counter(
 
     // XOR the outputs of the two ring oscillators using a SkyWater XOR gate
     sky130_fd_sc_hd__xor2_1 xor_gate (
-        .A(ro_out1),
-        .B(ro_out2),
-        .X(xor_out)
+        ro_out1,
+        ro_out2,
+        xor_out
     );
     // Simplified counter to keep track of buffer
     always @(posedge CLK or negedge RSTn) begin
