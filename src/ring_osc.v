@@ -27,3 +27,6 @@ module ring_osc(
 
     // Output is taken from the last inverter stage
     assign out = inter_wire[num_inv];
+
+
+endmodule 
