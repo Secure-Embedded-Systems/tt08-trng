@@ -12,14 +12,13 @@ module ro_buffer_counter(
 
     // Instantiate the first ring oscillator
     ring_osc RO1 (
-        .CLK(CLK),
         .en(en),
         .out(ro_out1)
     );
 
     // Instantiate the second ring oscillator
     ring_osc RO2 (
-        .CLK(CLK),
+       
         .en(en),
         .out(ro_out2)
     );
