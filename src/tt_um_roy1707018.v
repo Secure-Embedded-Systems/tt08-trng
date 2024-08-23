@@ -16,8 +16,19 @@ module tt_um_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
+ // Instantiate the ro_buffer_counter module
+  wire [15:0] buffer_out;
+  wire ro_out;
+
+  ro_buffer_counter ro_buffer_counter_inst (
+      .CLK(clk),
+      .RSTn(rst_n),
+      .en(ui_in[0]),         // Example: using the least significant bit of ui_in as enable
+      .buffer_out(buffer_out)
+  );
+
+  // Example: Output assignments (update based on your design needs)
+  assign uo_out  = buffer_out[7:0];  // Example: take lower 8 bits of buffer_out
   assign uio_out = 0;
   assign uio_oe  = 0;
 
