@@ -17,9 +17,7 @@ module ring_osc(
     endgenerate
 
     // NAND gate at the start of the ring oscillator
-    nand  nand_gate(en,
-        inter_wire[num_inv],inter_wire[0]
-    );
+    nand  nand_gate(en,inter_wire[num_inv],inter_wire[0]);
 
     // Output is taken from the last inverter stage
     assign out = inter_wire[num_inv];
