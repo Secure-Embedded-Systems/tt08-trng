@@ -17,7 +17,7 @@ module ring_osc(
     endgenerate
 
     // NAND gate at the start of the ring oscillator
-    sky130_fd_sc_hd__nand2_1 nand_gate (en,
+    nand  nand_gate(en,
         inter_wire[num_inv],inter_wire[0]
     );
 
