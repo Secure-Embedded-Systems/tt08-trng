@@ -95,10 +95,10 @@ module customNand
 
 wire a_delay, b_delay, q_delay;
 
-(* keep = "true" *) sky130_fd_sc_hd__buf_4 delay_a (a, a_delay);
-(* keep = "true" *) sky130_fd_sc_hd__buf_4 delay_b (b, b_delay);
+(* keep = "true" *) sky130_fd_sc_hd__buf_4 delay_a (a_delay,a);
+(* keep = "true" *) sky130_fd_sc_hd__buf_4 delay_b (b_delay,b);
 (* keep = "true" *) sky130_fd_sc_hd__nand2_1 nand_0 (q_delay ,a_delay, b_delay);
-(* keep = "true" *) sky130_fd_sc_hd__buf_4  delay_q (q_delay, q);
+(* keep = "true" *) sky130_fd_sc_hd__buf_4  delay_q (q,q_delay);
 
 endmodule
 //---------------------------
@@ -110,9 +110,8 @@ module customInv
 
 wire a_delay, q_delay;
 
-(* keep = "true" *) sky130_fd_sc_hd__buf_4  delay_a (a, a_delay);
-(* keep = "true" *) sky130_fd_sc_hd__inv_2 inv_0  (a_delay, q_delay);
+(* keep = "true" *) sky130_fd_sc_hd__buf_4  delay_a (a_delay,a);
+(* keep = "true" *) sky130_fd_sc_hd__inv_2 inv_0  (q_delay,a_delay);
 (* keep = "true" *) sky130_fd_sc_hd__buf_4 delay_q (q_delay, q);
 
-endmodule // inv_cell
-
+endmodule //inv cell

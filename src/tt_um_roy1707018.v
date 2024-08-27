@@ -26,7 +26,7 @@ module tt_um_roy1707018_roy1707018 (
       . ro_activate_1 (ui_in[0]),
               . ro_activate_2 (ui_in[1]),
   
-      .xor_buffer(buffer_out)
+      .xor_out(buffer_out)
   );
 
   // Example: Output assignments (update based on your design needs)
