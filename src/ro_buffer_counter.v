@@ -1,56 +1,50 @@
-module ro_buffer_counter(
-    input wire CLK,
+module dual_ro_xor (
     input wire RSTn,
-    input wire en,
-    output wire [15:0] buffer_out
+    input wire CLK,
+    input wire ro_activate_1,
+    input wire ro_activate_2,
+    output reg [15:0] xor_out
 );
 
-    wire ro_out1, ro_out2;
-    reg [15:0] buffer1, buffer2;
-    reg [3:0] counter;  // 4-bit counter to count up to 16 cycles
+    // Wires to connect the outputs of the two ring oscillators
+    wire [15:0] ro1_out;
+    wire [15:0] ro2_out;
     wire [15:0] xor_buffer;
 
     // Instantiate the first ring oscillator
-    ring_osc RO1 (
-        .en(en),
-        .out(ro_out1)
+    ro ro1 (
+        .RSTn(RSTn),
+        .CLK(CLK),
+        .ro_activate(ro_activate_1),
+        .ro_out(ro1_out)
     );
 
     // Instantiate the second ring oscillator
-    ring_osc RO2 (
-        .en(en),
-        .out(ro_out2)
+    ro ro2 (
+        .RSTn(RSTn),
+        .CLK(CLK),
+        .ro_activate(ro_activate_2),
+        .ro_out(ro2_out)
     );
 
-    // Counter and buffer reset logic
-    always @(posedge CLK or negedge RSTn) begin
-        if (!RSTn) begin
-            counter <= 4'b0;         // Reset counter
-            buffer1 <= 16'b0;        // Reset buffer1
-            buffer2 <= 16'b0;        // Reset buffer2
-        end else if (en) begin
-            if (counter < 4'd15) begin
-                counter <= counter + 1'b1;  // Increment counter
-                buffer1 <= {buffer1[14:0], ro_out1};  // Shift left and store new ro_out1 bit
-                buffer2 <= {buffer2[14:0], ro_out2};  // Shift left and store new ro_out2 bit
-            end else begin
-                counter <= 4'b0;         // Reset counter after 16 cycles
-                buffer1 <= 16'b0;        // Reset buffer1 for the next cycle
-                buffer2 <= 16'b0;        // Reset buffer2 for the next cycle
-            end
-        end
-    end
-
-    // XOR the buffers using the SkyWater130 XOR gate
+    // XOR the outputs of the two ring oscillators using the sky130_fd_sc_hd__xor2_1 gate
     genvar i;
     generate
-        for (i = 0; i < 16; i = i + 1) begin : xor_gen
-            sky130_fd_sc_hd__xor2_1 xor_gate (xor_buffer[i],buffer1[i],buffer2[i]
+        for (i = 0; i < 16; i = i + 1) begin : gen_xor
+            sky130_fd_sc_hd__xor2_1 xor_gate (
+                xor_buffer[i],     // XOR result for each bit
+                ro1_out[i],        // Bit from first ring oscillator
+                ro2_out[i]         // Bit from second ring oscillator
             );
         end
     endgenerate
 
-    // Output the XOR buffer content
-    assign buffer_out = xor_buffer;
-    
+    // Store the XOR result in the register on the clock edge
+    always @(posedge CLK or posedge RSTn) begin
+        if (RSTn)
+            xor_out <= 16'h0000;
+        else
+            xor_out <= xor_buffer;
+    end
+
 endmodule

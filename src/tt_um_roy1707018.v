@@ -21,10 +21,12 @@ module tt_um_roy1707018_roy1707018 (
   wire ro_out;
 
   ro_buffer_counter ro_buffer_counter_inst (
-      .CLK(clk),
       .RSTn(rst_n),
-      .en(ui_in[0]),         // Example: using the least significant bit of ui_in as enable
-      .buffer_out(buffer_out)
+      .CLK(clk),
+      . ro_activate_1 (ui_in[0]),
+              . ro_activate_2 (ui_in[1]),
+  
+      .xor_buffer(buffer_out)
   );
 
   // Example: Output assignments (update based on your design needs)
@@ -33,6 +35,7 @@ module tt_um_roy1707018_roy1707018 (
   assign uio_oe  = 0;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0};
+  wire _unused = &{ena, uio_in, clk, rst_n, ro_out, ui_in[7:2], buffer_out[15:8], 1'b0};
 
 endmodule
+
