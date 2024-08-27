@@ -1,4 +1,4 @@
-module dual_ro_xor (
+module ro_buffer_counter (
     input wire RSTn,
     input wire CLK,
     input wire ro_activate_1,
