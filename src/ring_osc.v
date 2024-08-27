@@ -71,7 +71,7 @@ module ro_long_stage
    customNand nc(nandout ,en, no[(STAGES-2)]);
    (*keep = "true"*) customInv  ic[0:(STAGES-2)] (ni, no);
 
-   assign #2.5 ni[0]            = nandout;
+   assign ni[0]            = nandout;
    assign ni[1:(STAGES-2)] = no[0:(STAGES-3)];
    assign q                = no[(STAGES-3)];
 endmodule
