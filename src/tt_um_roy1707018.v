@@ -33,7 +33,7 @@ module tt_um_roy1707018_roy1707018 (
   assign uio_oe  = 0;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, uio_in, clk, ui_in[7:2],uo_out[7:1],1'b0};
+  wire _unused = &{ena, uio_in, clk, ui_in[7:2],1'b0};
 
 endmodule
 
