@@ -6,7 +6,7 @@ module ring_osc(input wire  rst_n,
 //    reg                en;/
 //    wire               ro_output;
 //    wire inv1, inv2;
-//    (*keep = "true" *) wire q;
+   (*keep = "true" *) wire q;
    (*keep = "true" *) wire q0;
    (*keep = "true" *) wire q1;
    (*keep = "true" *) wire q2;
