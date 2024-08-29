@@ -1,7 +1,7 @@
 module ring_osc(input wire  rst_n,
           input wire  clk,
           input wire  ro_activate,
-          output reg [7:0]  ro_out);
+          output reg   ro_out);
    reg [7:0]         ro_count;
    reg                en;
    wire               ro_output;
@@ -12,9 +12,9 @@ module ring_osc(input wire  rst_n,
    (*keep = "true" *) wire q3;
    (*keep = "true" *) wire q4;
    (*keep = "true" *) wire q5;
-   //assign ro_output = ro_count[0];
-   assign ro_out = en ? ro_count : 8'b0;
-   always @(posedge clk or posedge rst_n) begin
+   assign ro_out = q;
+  // assign ro_out = en ? ro_count : 8'b0;
+  /* always @(*) begin
     if (rst_n)
         en <= 1'b0;
     else if (ro_activate)
@@ -37,13 +37,16 @@ module ring_osc(input wire  rst_n,
         ro_out <= ro_output;
     else
         ro_out <= 1'b0;
-    end
+    end */
    (* keep = "true" *) wire cq4;
    assign cq4 = (en & q4);
+   initial begin
+    q4 = 1'b1;  // Initialize q4 to 1
+   end
    (* keep = 1 *) cinv cinv1(.a(cq4),.q(q0));
    (* keep = 1 *) cinv cinv2(.a(q0), .q(q1));
    (* keep = 1 *) cinv cinv3(.a(q1), .q(q2));
    (* keep = 1 *) cinv cinv4(.a(q2), .q(q3));
    (* keep = 1 *) cinv cinv5(.a(q3), .q(q4));
-   assign q  = q0;
+   assign q  = q4;
 endmodule
