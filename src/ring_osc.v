@@ -24,7 +24,7 @@ module ring_osc(input wire  rst_n,
         en <= 1'b0;
     end
 
-   assign cq4 = (rst_n & q4);
+   assign cq4 = (en & q4);
    (* keep = 1 *) cinv cinv1(.a(cq4),.q(q0));
    (* keep = 1 *) cinv cinv2(.a(q0), .q(q1));
    (* keep = 1 *) cinv cinv3(.a(q1), .q(q2));
