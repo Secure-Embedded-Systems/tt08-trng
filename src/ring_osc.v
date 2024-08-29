@@ -15,30 +15,7 @@ module ring_osc(input wire  rst_n,
    (*keep = "true" *) wire q5;
    assign ro_out = q;
   // assign ro_out = en ? ro_count : 8'b0;
-  /* always @(*) begin
-    if (rst_n)
-        en <= 1'b0;
-    else if (ro_activate)
-        en <= 1'b1;
-    else
-        en <= 1'b0;
-    end
-    always @(posedge q or posedge rst_n) begin
-     if (rst_n)
-          ro_count <= 8'h0000;
-     else if (ro_count == 7'hff)
-          ro_count <= 8'h0000;
-     else
-          ro_count <= ro_count + 1'b1;
-   end
-    always @(posedge q or posedge rst_n) begin
-    if (rst_n)
-        ro_out <= 1'b0;
-    else if (ro_activate)
-        ro_out <= ro_output;
-    else
-        ro_out <= 1'b0;
-    end */
+ 
    (* keep = "true" *) wire cq4;
    // A temporary signal to initialize q4 at the start
     reg q4_init;
@@ -48,10 +25,10 @@ module ring_osc(input wire  rst_n,
 
     initial begin
         q4_init = 1'b1;  // Set q4_init to 1 at the beginning
-        assign inv1 = 1'b0;
-        assign inv2 = inv1;      // Wait 1 time unit
-        q4_init = inv2;  // Disable the initialization after 1 time unit
+        inv1 = 1'b0;
     end
+   assign inv2 = inv1;      // Wait 1 time unit
+   assign q4_init = inv2;  // Disable the initialization after 1 time unit
    assign cq4 = (en & q4);
    (* keep = 1 *) cinv cinv1(.a(cq4),.q(q0));
    (* keep = 1 *) cinv cinv2(.a(q0), .q(q1));
