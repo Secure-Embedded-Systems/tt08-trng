@@ -5,6 +5,7 @@ module ring_osc(input wire  rst_n,
    reg [7:0]         ro_count;
    reg                en;
    wire               ro_output;
+   wire inv1, inv2;
    (*keep = "true" *) wire q;
    (*keep = "true" *) wire q0;
    (*keep = "true" *) wire q1;
@@ -47,8 +48,9 @@ module ring_osc(input wire  rst_n,
 
     initial begin
         q4_init = 1'b1;  // Set q4_init to 1 at the beginning
-        #1;              // Wait 1 time unit
-        q4_init = 1'b0;  // Disable the initialization after 1 time unit
+        assign inv1 = 1'b0;
+        assign inv2 = inv1;      // Wait 1 time unit
+        q4_init = inv2;  // Disable the initialization after 1 time unit
     end
    assign cq4 = (en & q4);
    (* keep = 1 *) cinv cinv1(.a(cq4),.q(q0));
