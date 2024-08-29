@@ -17,24 +17,24 @@ module tt_um_roy1707018_roy1707018 (
 );
 
  // Instantiate the ro_buffer_counter module
-  wire  buffer_out;
+  wire [7:0]  buffer_out;
   wire ro_out;
 
-  ring_osc ro_buffer_counter_inst (.rst_n(rst_n),
-                                            .clk(clk),
-                                            .ro_activate(ui_in[0]),
-                                           /* .ro_activate_2(ui_in[1]),*/
-                                            .ro_out(buffer_out)
-                                            );
+  ring_osc ro_buffer_counter_inst (.rst_n(~rst_n),
+                            .clk(clk),
+                            .ro_activate_1(ui_in[0]),
+                            .ro_activate_2(ui_in[1]),
+			    .out_sel(ui_in[4:2]),
+                            .out(buffer_out)
+                           );
 
   // Example: Output assignments (update based on your design needs)
-  assign uo_out[0]  = buffer_out;  // Example: take lower 8 bits of buffer_out
-  assign uo_out[7:1] = 7'b0000000;
+  assign uo_out  = buffer_out;  // Example: take lower 8 bits of buffer_out
   assign uio_out = 0;
   assign uio_oe  = 0;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, uio_in, clk, ui_in[7:2],1'b0};
+  wire _unused = &{ena, uio_in, ui_in[7:5],  1'b0};
 
 endmodule
 

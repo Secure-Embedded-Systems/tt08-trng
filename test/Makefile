@@ -5,7 +5,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = cinv.v ring_osc.v tt_um_roy1707018.v
+PROJECT_SOURCES = cinv.v ring_osc.v ro_buffer_counter.v tt_um_roy1707018.v
 
 ifneq ($(GATES),yes)
 
@@ -13,6 +13,8 @@ ifneq ($(GATES),yes)
 SIM_BUILD				= sim_build/rtl
 VERILOG_SOURCES += $(addprefix $(SRC_DIR)/,$(PROJECT_SOURCES))
 COMPILE_ARGS 		+= -I$(SRC_DIR)
+COMPILE_ARGS    += -DUNIT_DELAY=\#1
+COMPILE_ARGS    += -DSIM
 
 else
 
@@ -24,6 +26,7 @@ COMPILE_ARGS    += -DUSE_POWER_PINS
 COMPILE_ARGS    += -DSIM
 COMPILE_ARGS    += -DUNIT_DELAY=\#1
 VERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v
+VERILOG_SOURCES += $(PWD)/sky130_fd_sc_hd__inv_override.v
 VERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v
 
 # this gets copied in by the GDS action workflow

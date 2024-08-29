@@ -19,16 +19,17 @@ project:
   source_files:
     - "tt_um_roy1707018.v"
     - "ring_osc.v"
+    - "ro_buffer_counter.v"
     - "cinv.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
   ui[0]: "ui_in[0]"
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
+  ui[1]: "ui_in[1]"
+  ui[2]: "ui_in[2]"
+  ui[3]: "ui_in[3]"
+  ui[4]: "ui_in[4]"
   ui[5]: ""
   ui[6]: ""
   ui[7]: ""
