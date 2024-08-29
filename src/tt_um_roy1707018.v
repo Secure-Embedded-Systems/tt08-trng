@@ -29,6 +29,7 @@ module tt_um_roy1707018_roy1707018 (
 
   // Example: Output assignments (update based on your design needs)
   assign uo_out[0]  = buffer_out;  // Example: take lower 8 bits of buffer_out
+  assign uo_out[7:1] = 7'b0000000;
   assign uio_out = 0;
   assign uio_oe  = 0;
 
