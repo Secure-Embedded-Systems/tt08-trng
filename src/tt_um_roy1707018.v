@@ -22,9 +22,9 @@ module tt_um_roy1707018_roy1707018 (
 
   ring_osc ro_buffer_counter_inst (.rst_n(rst_n),
                                             .clk(clk),
-                                            .ro_activate_1(ui_in[0]),
+                                            .ro_activate(ui_in[0]),
                                            /* .ro_activate_2(ui_in[1]),*/
-                                            .xor_out(buffer_out)
+                                            .ro_out(buffer_out)
                                             );
 
   // Example: Output assignments (update based on your design needs)
