@@ -45,7 +45,7 @@ async def test_project(dut):
     dut._log.info(f"Sbox output value: {output_value}")
     
     dut._log.info("Test TRNG  output")
-    dut.uio_in.value = 3
+    dut.ui_in.value = 3
     # Wait for one clock cycle to see the output values
     await ClockCycles(dut.clk, 4)
     dut.ui_in.value = 0
@@ -60,3 +60,4 @@ async def test_project(dut):
     # Read and log the output value
     output_value = dut.uo_out.value
     dut._log.info(f"Output value: {output_value}")
+    await ClockCycles(dut.clk, 4)
