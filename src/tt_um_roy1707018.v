@@ -17,7 +17,8 @@ module tt_um_roy1707018_roy1707018 (
 );
 
  // Instantiate the ro_buffer_counter module
-  wire [7:0]  buffer_out;
+  wire [7:0] buffer_out;
+  wire [4:0] ascon_sbox_out;
   wire ro_out;
 
   ro_buffer_counter ro_buffer_counter_inst (.rst_n(~rst_n),
@@ -27,14 +28,20 @@ module tt_um_roy1707018_roy1707018 (
 			    .out_sel(ui_in[4:2]),
                             .out(buffer_out)
                            );
+  ascon_sbox ascon_inst (.rst_n(~rst_n),
+                            .clk(clk),
+                            .activate_sbox(ui_in[0]),
+			    .sbox_in(ui_in[7:3]),
+                            .sbox_out(ascon_sbox_out)
+                           );
 
   // Example: Output assignments (update based on your design needs)
-  assign uo_out  = buffer_out;  // Example: take lower 8 bits of buffer_out
+	assign uo_out  = buffer_out ^ {3'b000,ascon_sbox_out};  // Example: take lower 8 bits of buffer_out
   assign uio_out = 0;
   assign uio_oe  = 0;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, uio_in, ui_in[7:5],  1'b0};
+  wire _unused = &{ena, uio_in, 1'b0};
 
 endmodule
 
