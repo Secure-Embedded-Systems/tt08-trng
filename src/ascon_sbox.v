@@ -6,7 +6,7 @@ module ascon_sbox(input wire  rst_n,
 
    reg  en;
    
-   assign ascon_sbox_out = en ? ps(sbox_in) : 5'b00000;
+   assign sbox_out = en ? ps(sbox_in) : 5'b00000;
    
    always @(posedge clk or posedge rst_n) begin
     if (rst_n)
