@@ -36,7 +36,7 @@ module tt_um_roy1707018_roy1707018 (
                            );
 
   // Example: Output assignments (update based on your design needs)
-	assign uo_out  = buffer_out ^ {3'b000,ascon_sbox_out};  // Example: take lower 8 bits of buffer_out
+  assign uo_out  = buffer_out ^ {3'b000,ascon_sbox_out};  // Example: take lower 8 bits of buffer_out ^ ascon sbox output
   assign uio_out = 0;
   assign uio_oe  = 0;
 
