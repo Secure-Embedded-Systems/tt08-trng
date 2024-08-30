@@ -18,7 +18,7 @@ module ascon_sbox(input wire  rst_n,
     end
 
    function [4 : 0] ps(input [4 : 0] x);
-    begin : ps
+    begin : ps_inst
       reg x0, x0_1, x0_2, x0_3, x0_4;
       reg x1, x1_1, x1_2, x1_3;
       reg x2, x2_1, x2_2, x2_3, x2_4;
