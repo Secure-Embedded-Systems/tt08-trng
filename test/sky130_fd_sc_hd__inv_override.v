@@ -1,5 +1,5 @@
-`ifndef SKY130_FD_SC_HD__INV_FUNCTIONAL_PP_V
-`define SKY130_FD_SC_HD__INV_FUNCTIONAL_PP_V
+`ifndef SKY130_FD_SC_HD__INV_2_V
+`define SKY130_FD_SC_HD__INV_2_V
 
 /**
  * inv: Inverter.
