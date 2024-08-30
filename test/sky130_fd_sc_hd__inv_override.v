@@ -13,7 +13,7 @@
 // Import user defined primitives.
 
 `celldefine
-module sky130_fd_sc_hd__inv (
+module sky130_fd_sc_hd__inv_2 (
     Y   ,
     A   ,
     VPWR,
