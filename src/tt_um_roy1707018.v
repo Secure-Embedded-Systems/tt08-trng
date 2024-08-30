@@ -31,8 +31,8 @@ module tt_um_roy1707018 (
 	
   ascon_sbox ascon_inst (.rst_n(~rst_n),
                             .clk(clk),
-                            .activate_sbox(ui_in[0]),
-			    .sbox_in(ui_in[7:3]),
+			    .activate_sbox(ui_in[7]),
+			    .sbox_in(ui_in[6:2]),
                             .sbox_out(ascon_sbox_out)
                            );
 
