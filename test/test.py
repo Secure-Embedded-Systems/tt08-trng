@@ -47,7 +47,7 @@ async def test_project(dut):
     dut._log.info("Test TRNG  output")
     dut.uio_in.value = 3
     # Wait for one clock cycle to see the output values
-    await ClockCycles(dut.clk, 2)
+    await ClockCycles(dut.clk, 4)
     dut.ui_in.value = 0
     
     # Read and log the output value
@@ -55,7 +55,7 @@ async def test_project(dut):
     dut._log.info(f"TRNG Output value: {output_value}")
     await ClockCycles(dut.clk, 2)
     dut.ui_in.value = 11
-    await ClockCycles(dut.clk, 1)
+    await ClockCycles(dut.clk, 4)
     dut.ui_in.value = 0
     # Read and log the output value
     output_value = dut.uo_out.value
