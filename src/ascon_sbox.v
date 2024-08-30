@@ -2,7 +2,7 @@ module ascon_sbox(input wire  rst_n,
           input wire  clk,
           input wire  activate_sbox,
           input wire [4:0]  sbox_in,
-          output wire [4:0]  ascon_sbox_out);
+          output wire [4:0]  sbox_out);
 
    reg  en;
    
