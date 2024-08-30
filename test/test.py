@@ -37,7 +37,7 @@ async def test_project(dut):
     dut._log.info("Test ASCON sbox output")
     # Set the input values you want to test
     
-    dut.ui_in.value = 132 //enable ascon sbox with input(5'b00001), check corresponding sbox ouput
+    dut.ui_in.value = 132 #//enable ascon sbox with input(5'b00001), check corresponding sbox ouput
     #Table 5: Ascon’s 5-bit S-box S as a lookup table.
     #x       0 1  2  3      4  5 6 7   8 9 a b    c d e f   10 11 12 13  14 15 16 17   18 19 1a 1b   1c 1d 1e 1f
     #S(x)    4 b 1f 14     1a 15 9 2  1b 5 8 12  1d 3 6 1c  1e 13  7  e  0  d  11 18   10  c  1 19   16 a  f  17
