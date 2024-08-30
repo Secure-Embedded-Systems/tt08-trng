@@ -19,7 +19,7 @@ module tt_um_roy1707018 (
  // Instantiate the ro_buffer_counter module
   wire [7:0] buffer_out;
   wire [4:0] ascon_sbox_out;
-  wire ro_out;
+
 
   ro_buffer_counter ro_buffer_counter_inst (.rst_n(~rst_n),
                             .clk(clk),
